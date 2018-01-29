@@ -1,0 +1,13 @@
+City of Calgary Careers: https://data.calgary.ca/Government/City-of-Calgary-Careers/5fsi-n9xm
+
+Calgary Transit Real Time: https://data.calgary.ca/Transportation-Transit/Calgary-Transit-Real-Time-Data-Access/kinc-qnf7
+
+Calgary Travel Times Real-time: https://data.calgary.ca/Transportation-Transit/Travel-Times/aeb8-fh2w
+
+Calgary News: https://data.calgary.ca/News-and-Events/City-of-Calgary-Newsroom/3x6m-4vs7
+
+Calgary Traffic incident: https://data.calgary.ca/Transportation-Transit/Traffic-Incidents/35ra-9556
+
+Weather: DarkskyAPI
+
+
