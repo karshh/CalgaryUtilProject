@@ -2,8 +2,9 @@ body > .mainContainer {
 	min-height: 700px;
 }
 
-.navbar {
-	/*background-color: white;*/
+.navbar-brand {
+	margin-right: 30px;
+
 }
 
 .jumbotron {

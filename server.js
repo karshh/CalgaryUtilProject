@@ -7,11 +7,7 @@ var PORT = 8888;
 var token = ""; // Your token here.
 
 
-var commuteData = {
-    deerfootData: [],
-    glenmoreData: [],
-    crowchildData: []
-};
+var commuteData = { deerfootData: [], glenmoreData: [], crowchildData: [] };
 
 
 var commuteURL = "https://data.calgary.ca/resource/5ddc-u6jh.json";
@@ -19,9 +15,9 @@ var commuteURL = "https://data.calgary.ca/resource/5ddc-u6jh.json";
 // var accidentData = null;
 
 
-app.use('/jquery.js', express.static(__dirname + "/" + '/jquery.js'));
-app.use('/style.css', express.static(__dirname + "/" + '/style.css'));
-app.use('/client.js', express.static(__dirname + "/" + '/client.js'));
+app.use('/jquery.js', express.static(__dirname + "/" + '/js/jquery.js'));
+app.use('/style.css', express.static(__dirname + "/" + '/css/style.css'));
+app.use('/client.js', express.static(__dirname + "/" + '/js/client.js'));
 
 function calculateTimeDifference(time1, time2) {
     var time1Seconds = (parseInt(time1.substring(0, time1.indexOf(':')) * 60)) + (parseInt(time1.substring(time1.indexOf(':') + 1, time1.length)));
@@ -31,6 +27,10 @@ function calculateTimeDifference(time1, time2) {
 
 function getJSONdata(request, response, filename) {
     var JSONdata = [];
+    
+    // Empty out commuteData.
+    commuteData = { deerfootData: [], glenmoreData: [], crowchildData: [] };
+
     axios({
             method: "GET",
             url: commuteURL,
@@ -70,6 +70,7 @@ function getJSONdata(request, response, filename) {
 
 
             }
+
             response.sendFile(__dirname + "/" + filename);
 
         }).catch(function(err) {
@@ -80,9 +81,9 @@ function getJSONdata(request, response, filename) {
 
 
 app.get('/', (request, response) => getJSONdata(request,response, '/index.html'));
-app.get('/contact', (request, response) => response.sendFile(__dirname + "/" + "contact.html"));
-app.get('/products', (request, response) => response.sendFile(__dirname + "/" + "products.html"));
-app.get('/about', (request, response) => response.sendFile(__dirname + "/" + "about.html"));
+app.get('/contact', (request, response) => response.sendFile(__dirname + "/" + "/pg/contact.html"));
+app.get('/products', (request, response) => response.sendFile(__dirname + "/" + "/pg/products.html"));
+app.get('/about', (request, response) => response.sendFile(__dirname + "/" + "/pg/about.html"));
 
 app.get('/trafficData', (request, response) => response.send(commuteData));
 
