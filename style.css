@@ -1,17 +1,42 @@
-body > .container {
-	min-height: 700px; 
+body > .mainContainer {
+	min-height: 700px;
+}
+
+.navbar {
+	/*background-color: white;*/
+}
+
+.jumbotron {
+	background-color: #d51b32;
+	color: white;
+}
+
+
+.tableRow {
+	font-size: 14px;
+	padding-top: 100px;
+}
+
+.tableRow h3 {
+	width: 100%;
+	font-size: 30px;
+	margin-left: 20px;
+	margin-bottom: 20px;
 }
 
 .footer-container {
+	margin-top:50px;
 	height: 100px;
 	width: 100%;
-	background-color: #eceeef;
+	background-color: #d51b32;
+	color: #F9FBFC;
 }
+
 
 
 footer .fa {
 	border: 2px solid #fff;
 	border-radius: 5px;
 	padding: 7px;
-	border-color: #292b2c;
+	color: #F9FBFC;
 }

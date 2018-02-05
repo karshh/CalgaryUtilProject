@@ -17,7 +17,7 @@ function writeTable(data, freeway) {
                 <td style=\"color:`+ color +`\">` 
                 	+ delaySymbol + " "
                 	+ (val.diff_time == 0 ? "No Delay" : Math.abs(val.diff_time)) + " " 
-                	+ (val.diff_time == 1 || val.diff_time == -1 ? "min" : (val.diff_time == 0 ? "" : "mins")) 
+                	+ (val.diff_time == 1 || val.diff_time == -1 ? "second" : (val.diff_time == 0 ? "" : "seconds")) 
                 	 +  `</td>
             </tr>
     	`);
@@ -35,6 +35,7 @@ $(document).ready(function() {
 		type: 'GET',
 		url: 'http://localhost:8888/trafficData',
 		success: (trafficData) => {
+
 			writeTable(trafficData.deerfootData, "deerfootTable");
 			writeTable(trafficData.glenmoreData, "glenmoreTable");
 			writeTable(trafficData.crowchildData, "crowchildTable");

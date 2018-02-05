@@ -15,17 +15,13 @@ var commuteData = {
 
 
 var commuteURL = "https://data.calgary.ca/resource/5ddc-u6jh.json";
-var accidentURL = "https://data.calgary.ca/resource/m328-x8wy.json";
+// var accidentURL = "https://data.calgary.ca/resource/m328-x8wy.json";
+// var accidentData = null;
 
 
-var accidentData = null;
 app.use('/jquery.js', express.static(__dirname + "/" + '/jquery.js'));
 app.use('/style.css', express.static(__dirname + "/" + '/style.css'));
 app.use('/client.js', express.static(__dirname + "/" + '/client.js'));
-app.use('/about.html', express.static(__dirname + "/" + '/about.html'));
-app.use('/products.html', express.static(__dirname + "/" + '/products.html'));
-app.use('/contact.html', express.static(__dirname + "/" + '/contact.html'));
-
 
 function calculateTimeDifference(time1, time2) {
     var time1Seconds = (parseInt(time1.substring(0, time1.indexOf(':')) * 60)) + (parseInt(time1.substring(time1.indexOf(':') + 1, time1.length)));
@@ -33,12 +29,7 @@ function calculateTimeDifference(time1, time2) {
     return time1Seconds - time2Seconds; 
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-//
-//  This code is executed when we access the home page of the host.
-//
-
-app.get('/', (request, response) => {
+function getJSONdata(request, response, filename) {
     var JSONdata = [];
     axios({
             method: "GET",
@@ -79,16 +70,21 @@ app.get('/', (request, response) => {
 
 
             }
-            response.sendFile(__dirname + "/" + "index.html");
+            response.sendFile(__dirname + "/" + filename);
 
         }).catch(function(err) {
             console.log("ERROR:" + err);
         });
-});
 
-app.get('/trafficData', (request, response) => {
-    response.send(commuteData);
-});
+}
+
+
+app.get('/', (request, response) => getJSONdata(request,response, '/index.html'));
+app.get('/contact', (request, response) => response.sendFile(__dirname + "/" + "contact.html"));
+app.get('/products', (request, response) => response.sendFile(__dirname + "/" + "products.html"));
+app.get('/about', (request, response) => response.sendFile(__dirname + "/" + "about.html"));
+
+app.get('/trafficData', (request, response) => response.send(commuteData));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //

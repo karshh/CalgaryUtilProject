@@ -11,41 +11,71 @@
 
 	<body>
 
-		<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-		  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  <a class="navbar-brand" href="index.html">Traffic.YYC</a>
-		  <div class="collapse navbar-collapse" id="navbarNav">
-		    <ul class="navbar-nav">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="about.html">About</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="products.html">Products</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="contct.html">Contact</a>
-		      </li>
-		    </ul>
-		  </div>
+		<nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded ">
+			<div class="container">
+			  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			    <span class="navbar-toggler-icon"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Traffic.YYC</a>
+			  <div class="collapse navbar-collapse" id="navbarNav">
+			    <ul class="navbar-nav mx-auto">
+			      <li class="nav-item active">
+			        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#deerfootRow">Deerfoot</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#glenmoreRow">Glenmore</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="#crowchildRow">Crowchild</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="/about">About</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="/products">Products</a>
+			      </li>
+			      <li class="nav-item">
+			        <a class="nav-link" href="/contact">Contact</a>
+			      </li>
+			    </ul>
+			  </div>
+			</div>
 		</nav>
 
 		<div class="jumbotron jumbotron-fluid">
 		  <div class="container">
+		  	<br>
 		    <h1 class="display-4 text-center">Home</h1>
 		    <p class="lead text-center">Below is the current traffic on major Calgary Freeways, as per the city data.</p>
-
-
 		  </div>
 		</div>
 
+
+		<!-- TODO: shorten scroll by implementing this. -->
+<!-- 
 		<div class="container">
-			<div class="row">
-				<h3>Deerfoot</h3>
+			<ul class="nav nav-tabs">
+			  <li class="nav-item">
+			    <a class="nav-link active" href="#">All</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Deerfoot</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link" href="#">Glenmore</a>
+			  </li>
+			  <li class="nav-item">
+			    <a class="nav-link disabled" href="#">Crowchild</a>
+			  </li>
+			</ul>
+		</div> -->
+
+		<div class="container mainContainer">
+			<div class="row tableRow" id="deerfootRow">
+				<h3 class="display-4 tableHeader">Deerfoot Tr.</h3>
 				<table class="table" id="deerfootTable">
 				    <tr>
 				      <th scope="col">From</th>
@@ -58,8 +88,8 @@
 				</table>
 			</div>
 			<br>
-			<div class="row">
-				<h3>Glenmore</h3>
+			<div class="row tableRow" id="glenmoreRow">
+				<h3 class="display-4  tableHeader">Glenmore Tr.</h3>
 				<table class="table" id="glenmoreTable">
 				    <tr>
 				      <th scope="col">From</th>
@@ -73,8 +103,8 @@
 			</div>
 
 			<br>
-			<div class="row">
-				<h3>Crowchild</h3>
+			<div class="row tableRow" id="crowchildRow">
+				<h3 class="display-4  tableHeader">Crowchild Tr.</h3>
 				<table class="table" id="crowchildTable">
 				    <tr>
 				      <th scope="col">From</th>
