@@ -7,41 +7,26 @@ var PORT = 8888;
 var token = ""; // Your token here.
 
 
+var commuteData = {
+    deerfootData: [],
+    glenmoreData: [],
+    crowchildData: []
+};
+
+
 var commuteURL = "https://data.calgary.ca/resource/5ddc-u6jh.json";
-var commuteDeerfootURL = commuteURL+"?major_road=Deerfoot" 
-var commuteGlenmoreURL = commuteURL+"?major_road=Glenmore" 
-var commuteCrowchildURL = commuteURL+"?major_road=Crowchild" 
-
-var deerfootData = null;
-var glenmoreData = null;
-var crowchildData = null;
-
 var accidentURL = "https://data.calgary.ca/resource/m328-x8wy.json";
+
+
+
+
+
+
 var accidentData = null;
 // app.use('/style.css', express.static(__dirname + "/" + '/style.css'));
 // app.use('/jquery.js', express.static(__dirname + "/" + '/jquery.js'));
-// app.use('/client.js', express.static(__dirname + "/" + '/client.js'));
+app.use('/client.js', express.static(__dirname + "/" + '/client.js'));
 
-
-function getCommuteData(commURL) {
-
-    console.log("URL=" + commURL);
-    axios({
-        method: "GET",
-        url: commURL,
-        data: {
-            "$limit" : 5000,
-            "$$app_token" : token
-        }
-    }).then(function(res) {
-
-        console.log("DatSize=" + res.data.length);
-        return res.data;
-    }).catch(function(err) {
-        console.log("ERROR:" + err);
-    });
-
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -49,8 +34,62 @@ function getCommuteData(commURL) {
 //
 
 app.get('/', (request, response) => {
+    var JSONdata = [];
+    axios({
+            method: "GET",
+            url: commuteURL,
+            data: {
+                "$limit" : 5000,
+                "$$app_token" : token
+            }
+        }).then(function(res) {
+            JSONdata.push.apply(JSONdata, res.data);
 
+            for (var i = 0; i < JSONdata.length; i++) {
+                var avg_time_ = JSONdata[i].avg_travel_time_mins_secs;
+                var cur_time_ = JSONdata[i].current_travel_time_mins_secs;
+                
+
+
+                if (JSONdata[i].major_road === 'Deerfoot') {
+                    commuteData.deerfootData.push({
+                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
+                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
+                        avg_time: avg_time_,
+                        cur_time: cur_time_,
+                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
+                    }); 
+                } 
+                else if (JSONdata[i].major_road === 'Glenmore') {
+                    commuteData.glenmoreData.push({
+                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
+                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
+                        avg_time: avg_time_,
+                        cur_time: cur_time_,
+                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
+                    }); 
+                } 
+                else if (JSONdata[i].major_road === 'Crowchild') {
+                    commuteData.crowchildData.push({
+                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
+                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
+                        avg_time: avg_time_,
+                        cur_time: cur_time_,
+                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
+                    }); 
+                } 
+            }
+
+            console.log(commuteData);
+
+        }).catch(function(err) {
+            console.log("ERROR:" + err);
+        });
 });
+
+app.get('/trafficdata', (request, response) => {
+    res.send(commuteData);
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -59,9 +98,6 @@ app.get('/', (request, response) => {
 //  value we stored in data earlier.
 //  
 
-app.post('/deerfootData', (req, res) => res.send(deerfootData));
-app.post('/glenmoreData', (req, res) => res.send(glenmoreData));
-app.post('/crowchildData', (req, res) => res.send(crowchildData));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -69,17 +105,6 @@ app.post('/crowchildData', (req, res) => res.send(crowchildData));
 //
 
 var Server = app.listen(PORT, 
-    () => {
-
-        deerfootData = getCommuteData(commuteDeerfootURL);
-        glenmoreData = getCommuteData(commuteGlenmoreURL);
-        crowchildData = getCommuteData(commuteCrowchildURL);
-
-        console.log(deerfootData.length);
-        console.log(glenmoreData.length);
-        console.log(crowchildData.length);
-
-    });
-
+    () => console.log("App listening at http://localhost:%s\n", Server.address().port));
 
 ///////////////////////////////////////////////////////////////////////////////////////////////

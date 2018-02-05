@@ -18,6 +18,7 @@
   "homepage": "https://github.com/karshh/CalgaryUtilProject#readme",
   "dependencies": {
     "axios": "^0.17.1",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "gulp": "^3.9.1"
   }
 }
