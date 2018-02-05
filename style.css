@@ -1,0 +1,17 @@
+body > .container {
+	min-height: 700px; 
+}
+
+.footer-container {
+	height: 100px;
+	width: 100%;
+	background-color: #eceeef;
+}
+
+
+footer .fa {
+	border: 2px solid #fff;
+	border-radius: 5px;
+	padding: 7px;
+	border-color: #292b2c;
+}

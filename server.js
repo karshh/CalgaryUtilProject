@@ -18,15 +18,20 @@ var commuteURL = "https://data.calgary.ca/resource/5ddc-u6jh.json";
 var accidentURL = "https://data.calgary.ca/resource/m328-x8wy.json";
 
 
-
-
-
-
 var accidentData = null;
-// app.use('/style.css', express.static(__dirname + "/" + '/style.css'));
-// app.use('/jquery.js', express.static(__dirname + "/" + '/jquery.js'));
+app.use('/jquery.js', express.static(__dirname + "/" + '/jquery.js'));
+app.use('/style.css', express.static(__dirname + "/" + '/style.css'));
 app.use('/client.js', express.static(__dirname + "/" + '/client.js'));
+app.use('/about.html', express.static(__dirname + "/" + '/about.html'));
+app.use('/products.html', express.static(__dirname + "/" + '/products.html'));
+app.use('/contact.html', express.static(__dirname + "/" + '/contact.html'));
 
+
+function calculateTimeDifference(time1, time2) {
+    var time1Seconds = (parseInt(time1.substring(0, time1.indexOf(':')) * 60)) + (parseInt(time1.substring(time1.indexOf(':') + 1, time1.length)));
+    var time2Seconds = (parseInt(time2.substring(0, time2.indexOf(':')) * 60)) + (parseInt(time2.substring(time2.indexOf(':') + 1, time2.length)));
+    return time1Seconds - time2Seconds; 
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -48,48 +53,42 @@ app.get('/', (request, response) => {
             for (var i = 0; i < JSONdata.length; i++) {
                 var avg_time_ = JSONdata[i].avg_travel_time_mins_secs;
                 var cur_time_ = JSONdata[i].current_travel_time_mins_secs;
-                
 
+                var diff_time_ = calculateTimeDifference(avg_time_, cur_time_);
+                var trafficVal = {
+                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
+                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
+                        avg_time: avg_time_,
+                        cur_time: cur_time_,
+                        diff_time: diff_time_
+                };
+                if (trafficVal.from === '') {
+                    trafficVal.from = JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf(' to '));
+                    trafficVal.to = JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf(' to ') + 4, JSONdata[i].road_segment.length);
+                }
 
                 if (JSONdata[i].major_road === 'Deerfoot') {
-                    commuteData.deerfootData.push({
-                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
-                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
-                        avg_time: avg_time_,
-                        cur_time: cur_time_,
-                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
-                    }); 
+                    commuteData.deerfootData.push(trafficVal); 
                 } 
                 else if (JSONdata[i].major_road === 'Glenmore') {
-                    commuteData.glenmoreData.push({
-                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
-                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
-                        avg_time: avg_time_,
-                        cur_time: cur_time_,
-                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
-                    }); 
+                    commuteData.glenmoreData.push(trafficVal); 
                 } 
                 else if (JSONdata[i].major_road === 'Crowchild') {
-                    commuteData.crowchildData.push({
-                        from: JSONdata[i].road_segment.substring(0, JSONdata[i].road_segment.indexOf('-')),
-                        to: JSONdata[i].road_segment.substring(JSONdata[i].road_segment.indexOf('-') + 1, JSONdata[i].road_segment.length),
-                        avg_time: avg_time_,
-                        cur_time: cur_time_,
-                        diff_time: parseInt(avg_time_.replace(':','')) - parseInt(cur_time_.replace(':',''))
-                    }); 
-                } 
-            }
+                    commuteData.crowchildData.push(trafficVal); 
+                }
 
-            console.log(commuteData);
+
+            }
+            response.sendFile(__dirname + "/" + "index.html");
 
         }).catch(function(err) {
             console.log("ERROR:" + err);
         });
 });
 
-app.get('/trafficdata', (request, response) => {
-    res.send(commuteData);
-}
+app.get('/trafficData', (request, response) => {
+    response.send(commuteData);
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //
