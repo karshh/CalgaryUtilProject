@@ -1,0 +1,50 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css', integrity='sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ', crossorigin='anonymous')
+    link(rel='stylesheet', type='text/css', href='style.css')
+  body
+    nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+      button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+        span.navbar-toggler-icon
+      a.navbar-brand(href='/') Traffic.YYC
+      #navbarNav.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link(href='/') Home
+          li.nav-item.active
+            a.nav-link(href='/about')
+              | About 
+              span.sr-only (current)
+          li.nav-item
+            a.nav-link(href='/products') Products
+          li.nav-item
+            a.nav-link(href='/contact ') Contact
+    .jumbotron
+      .container
+        h1.display-4.text-center About
+    .container.mainContainer
+      br
+      p.lead
+        | This web application was created by Karsh Sharma, a WBDV fast-track student at SAIT.
+      p.lead
+        | The data collected here was retrieved from the traffic datasets from the City of Calgary. To see more, please see 
+        a(href='products.html') Products
+        | .
+  footer
+    .container.footer-container
+      p.lead.text-center
+        | Follow Us:
+      ul.list-inline.text-center.social-media
+        li.list-inline-item
+          i.fa.fa-facebook
+        li.list-inline-item
+          i.fa.fa-twitter
+        li.list-inline-item
+          i.fa.fa-instagram
+    script(type='text/javascript', src='./jquery.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js', integrity='sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb', crossorigin='anonymous')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js', integrity='sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn', crossorigin='anonymous')
