@@ -19,6 +19,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "express": "^4.16.2",
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
