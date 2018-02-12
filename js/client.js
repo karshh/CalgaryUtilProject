@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: 'GET',
-		url: '/trafficData',
+		url: 'http://localhost:8888/trafficData',
 		success: (trafficData) => {
 
 			writeTable(trafficData.deerfootData, "deerfootTable");
