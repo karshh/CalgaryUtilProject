@@ -1,0 +1,44 @@
+body > .mainContainer {
+	min-height: 600px;
+}
+
+.navbar-brand {
+	margin-right: 30px;
+
+}
+
+.jumbotron {
+	background-color: #d51b32;
+	color: white;
+}
+
+
+.tableRow {
+	width: 100%;
+	font-size: 14px;
+	padding-top: 100px;
+}
+
+.tableRow h3 {
+	width: 100%;
+	font-size: 30px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+.footer-container {
+	margin-top:50px;
+	height: 100px;
+	width: 100%;
+	background-color: #d51b32;
+	color: #F9FBFC;
+}
+
+
+
+footer .fa {
+	border: 2px solid #fff;
+	border-radius: 5px;
+	padding: 7px;
+	color: #F9FBFC;
+}
