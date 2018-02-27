@@ -5,7 +5,13 @@ var https = require("https");
 var fs = require("fs");
 var PORT = 8888;
 
+var key = fs.readFileSync('encryption/privkey.pem' );
+var cert = fs.readFileSync('encryption/fullchain.pem' );
 
+var options = {
+	key: key,
+	cert: cert
+}
 var token = ""; // Your token here.
 
 
@@ -80,7 +86,12 @@ function getJSONdata(request, response, filename) {
         });
 
 }
-
+app.use((req, res, next) => {
+  if(!req.secure) {
+    return res.redirect(['https://', req.get('Host'), req.url].join(''));
+  }
+  next();
+});
 
 app.get('/', (request, response) => getJSONdata(request,response, '/index.html'));
 app.get('/contact', (request, response) => response.sendFile(__dirname + "/" + "/pg/contact.html"));
@@ -105,5 +116,5 @@ app.get('/trafficData', (request, response) => response.send(commuteData));
 var Server = app.listen(PORT, 
     () => console.log("App listening at http://localhost:%s\n", Server.address().port));
 
-
+https.createServer(options, app).listen(PORT+1);
 ///////////////////////////////////////////////////////////////////////////////////////////////
