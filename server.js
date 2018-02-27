@@ -1,8 +1,10 @@
 var express = require("express");
 var axios = require("axios");
 var app = express();
-
+var https = require("https");
+var fs = require("fs");
 var PORT = 8888;
+
 
 var token = ""; // Your token here.
 
@@ -102,5 +104,6 @@ app.get('/trafficData', (request, response) => response.send(commuteData));
 
 var Server = app.listen(PORT, 
     () => console.log("App listening at http://localhost:%s\n", Server.address().port));
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
